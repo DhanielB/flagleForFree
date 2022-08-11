@@ -437,6 +437,8 @@ export default function Home() {
                 setOneDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
+
+                distance == 0 ? setId(7) : null
               }catch(err) {
                 setOneDistance(
                   'Not found'
@@ -464,6 +466,8 @@ export default function Home() {
                 setTwoDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
+
+                distance == 0 ? setId(7) : null
               }catch(err) {
                 setTwoDistance(
                   'Not found'
@@ -491,6 +495,8 @@ export default function Home() {
                 setThreeDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
+
+                distance == 0 ? setId(7) : null
               }catch(err) {
                 setThreeDistance(
                   'Not found'
@@ -545,6 +551,8 @@ export default function Home() {
                 setFiveDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
+
+                distance == 0 ? setId(7) : null
               }catch(err) {
                 setFiveDistance(
                   'Not found'
@@ -574,6 +582,7 @@ export default function Home() {
                 );
 
                 setSix(flag.name)
+                distance == 0 ? setId(7) : null
               }catch(err) {
                 setSixDistance(
                   'Not found'
