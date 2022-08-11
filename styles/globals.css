@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 .app {
-  display: flex;
   width: 100%;
   height: 100%;
-  backagroud-color: #1b1a1a;
+  background-color: #1b1a1a;
 }
 
 body {
-  backagroud-color: #1b1a1a;
+  background-color: #1b1a1a;
 }
