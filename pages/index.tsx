@@ -268,6 +268,7 @@ export default function Home() {
   const size = useWindowSize();
 
   const [id, setId] = useState(1);
+  const [win, setWin] = useState(false);
   const [showResult, setShowResult] = useState(false);
 
   const [one, setOne] = useState("");
@@ -467,12 +468,7 @@ export default function Home() {
           </h1>
         </div>
 
-        {oneDistance == "0" ||
-        twoDistance == "0" ||
-        threeDistance == "0" ||
-        fourDistance == "0" ||
-        fiveDistance == "0" ||
-        sixDistance == "0" ? (
+        {win ? (
           <Confetti width={size.width} height={size.height} />
         ) : null}
 
@@ -515,6 +511,7 @@ export default function Home() {
                 );
 
                 distance == 0 ? setId(7) : null;
+                distance == 0 ? setWin(true) : null;
               } catch (err) {
                 // pass
               }
@@ -542,6 +539,7 @@ export default function Home() {
                 );
 
                 distance == 0 ? setId(7) : null;
+                distance == 0 ? setWin(true) : null;
               } catch (err) {
                 // pass
               }
@@ -569,6 +567,7 @@ export default function Home() {
                 );
 
                 distance == 0 ? setId(7) : null;
+                distance == 0 ? setWin(true) : null;
               } catch (err) {
                 // pass
               }
@@ -594,6 +593,9 @@ export default function Home() {
                 setFourDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
+                
+                distance == 0 ? setId(7) : null;
+                distance == 0 ? setWin(true) : null;
               } catch (err) {
                 // pass
               }
@@ -621,6 +623,7 @@ export default function Home() {
                 );
 
                 distance == 0 ? setId(7) : null;
+                distance == 0 ? setWin(true) : null;
               } catch (err) {
                 // pass
               }
@@ -649,6 +652,7 @@ export default function Home() {
 
                 setShowResult(true);
                 distance == 0 ? setId(7) : null;
+                distance == 0 ? setWin(true) : null;
               } catch (err) {
                 // pass
               }
