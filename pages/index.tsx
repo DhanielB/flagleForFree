@@ -318,7 +318,7 @@ export default function Home() {
           value={value}
           autoFocus={id == validId}
         ></input>
-        {id == validId ? (
+        {id == validId || id == 0 ? (
           <button
             className="font-bold p-2 bg-white rounded left-80 absolute"
             onClick={() => {
