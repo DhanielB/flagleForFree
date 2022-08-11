@@ -1,5 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
+
+import Confetti from "react-confetti";
+
 import Flag from "react-world-flags";
 import { getDistance } from "geolib";
 
@@ -262,7 +265,10 @@ export default function Home() {
     "ZW",
   ];
 
+  const size = useWindowSize();
+
   const [id, setId] = useState(1);
+  const [showResult, setShowResult] = useState(false);
 
   const [one, setOne] = useState("");
   const [oneDistance, setOneDistance] = useState("KM");
@@ -281,6 +287,39 @@ export default function Home() {
 
   const [six, setSix] = useState("");
   const [sixDistance, setSixDistance] = useState("KM");
+
+  function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = useState({
+      width: 0,
+      height: 0,
+    });
+
+    useEffect(() => {
+      // only execute all the code below in client side
+      if (typeof window !== "undefined") {
+        // Handler to call on window resize
+        function handleResize() {
+          // Set window width/height to state
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          });
+        }
+
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+      }
+    }, []); // Empty array ensures that effect is only run on mount
+    return windowSize;
+  }
 
   function CountryInput({
     className,
@@ -313,6 +352,24 @@ export default function Home() {
           onInput={(event) => {
             if (id == validId) {
               setValue(event.currentTarget.value);
+            }
+          }}
+          onKeyPress={(event) => {
+            if (id == validId && event.key == "Enter") {
+              const allCountriesNames = [];
+              const allCountries = countries.all;
+
+              for (let countryData of allCountries) {
+                const countryName = countryData.name;
+
+                allCountriesNames.push(countryName);
+              }
+
+              if (allCountriesNames.includes(value)) {
+                setValidId(validId + 1);
+
+                callback(value);
+              }
             }
           }}
           value={value}
@@ -404,13 +461,32 @@ export default function Home() {
   return (
     <div className="app flex bg-[#1b1a1a] w-screen h-screen">
       <main className="flex">
-        <div className="font-extrabold tracking-tighter text-4xl top-16 left-40 absolute">
+        <div className="font-extrabold tracking-tighter text-4xl top-12 left-40 absolute">
           <h1 className="text-green-500">
             FLA<span className="text-yellow-500">gle</span>
           </h1>
         </div>
 
-        <div className=" left-32 top-32 absolute">
+        {oneDistance == "0" ||
+        twoDistance == "0" ||
+        threeDistance == "0" ||
+        fourDistance == "0" ||
+        fiveDistance == "0" ||
+        sixDistance == "0" ? (
+          <Confetti width={size.width} height={size.height} />
+        ) : null}
+
+        <div>
+          {showResult ? (
+            <div className="flex w-screen h-screen">
+              <h1 className="text-center w-16 top-24 left-[11rem] text-white font-bold absolute">
+                {flag.name.slice(0, 11)}
+              </h1>
+            </div>
+          ) : null}
+        </div>
+
+        <div className=" left-32 top-36 absolute">
           <FlagWithBlock
             id={id}
             className="border-1 border-white w-40 h-28 rounded"
@@ -438,11 +514,9 @@ export default function Home() {
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
 
-                distance == 0 ? setId(7) : null
-              }catch(err) {
-                setOneDistance(
-                  'Not found'
-                )
+                distance == 0 ? setId(7) : null;
+              } catch (err) {
+                // pass
               }
             }}
           ></CountryInput>
@@ -458,7 +532,7 @@ export default function Home() {
             callback={(value: string) => {
               const from = flag.code;
               const to = getCode(value);
-              
+
               try {
                 const distance =
                   getDistance(geoo.country(from), geoo.country(to)) / 1000;
@@ -467,11 +541,9 @@ export default function Home() {
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
 
-                distance == 0 ? setId(7) : null
-              }catch(err) {
-                setTwoDistance(
-                  'Not found'
-                )
+                distance == 0 ? setId(7) : null;
+              } catch (err) {
+                // pass
               }
             }}
           ></CountryInput>
@@ -487,7 +559,7 @@ export default function Home() {
             callback={(value: string) => {
               const from = flag.code;
               const to = getCode(value);
-              
+
               try {
                 const distance =
                   getDistance(geoo.country(from), geoo.country(to)) / 1000;
@@ -496,11 +568,9 @@ export default function Home() {
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
 
-                distance == 0 ? setId(7) : null
-              }catch(err) {
-                setThreeDistance(
-                  'Not found'
-                )
+                distance == 0 ? setId(7) : null;
+              } catch (err) {
+                // pass
               }
             }}
           ></CountryInput>
@@ -516,7 +586,7 @@ export default function Home() {
             callback={(value: string) => {
               const from = flag.code;
               const to = getCode(value);
-              
+
               try {
                 const distance =
                   getDistance(geoo.country(from), geoo.country(to)) / 1000;
@@ -524,10 +594,8 @@ export default function Home() {
                 setFourDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
-              }catch(err) {
-                setFourDistance(
-                  'Not found'
-                )
+              } catch (err) {
+                // pass
               }
             }}
           ></CountryInput>
@@ -543,7 +611,7 @@ export default function Home() {
             callback={(value: string) => {
               const from = flag.code;
               const to = getCode(value);
-              
+
               try {
                 const distance =
                   getDistance(geoo.country(from), geoo.country(to)) / 1000;
@@ -552,11 +620,9 @@ export default function Home() {
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
 
-                distance == 0 ? setId(7) : null
-              }catch(err) {
-                setFiveDistance(
-                  'Not found'
-                )
+                distance == 0 ? setId(7) : null;
+              } catch (err) {
+                // pass
               }
             }}
           ></CountryInput>
@@ -572,7 +638,7 @@ export default function Home() {
             callback={(value: string) => {
               const from = flag.code;
               const to = getCode(value);
-              
+
               try {
                 const distance =
                   getDistance(geoo.country(from), geoo.country(to)) / 1000;
@@ -581,12 +647,10 @@ export default function Home() {
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
 
-                setSix(flag.name)
-                distance == 0 ? setId(7) : null
-              }catch(err) {
-                setSixDistance(
-                  'Not found'
-                )
+                setShowResult(true);
+                distance == 0 ? setId(7) : null;
+              } catch (err) {
+                // pass
               }
             }}
           ></CountryInput>
