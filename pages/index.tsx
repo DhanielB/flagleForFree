@@ -262,7 +262,7 @@ export default function Home() {
     "ZW",
   ];
 
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(1);
 
   const [one, setOne] = useState("");
   const [oneDistance, setOneDistance] = useState("KM");
