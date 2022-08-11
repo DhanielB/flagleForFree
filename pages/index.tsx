@@ -512,6 +512,7 @@ export default function Home() {
 
                 distance == 0 ? setId(7) : null;
                 distance == 0 ? setWin(true) : null;
+                distance == 0 ? setShowResult(true); : null;
               } catch (err) {
                 // pass
               }
@@ -540,6 +541,7 @@ export default function Home() {
 
                 distance == 0 ? setId(7) : null;
                 distance == 0 ? setWin(true) : null;
+                distance == 0 ? setShowResult(true); : null;
               } catch (err) {
                 // pass
               }
@@ -568,6 +570,7 @@ export default function Home() {
 
                 distance == 0 ? setId(7) : null;
                 distance == 0 ? setWin(true) : null;
+                distance == 0 ? setShowResult(true); : null;
               } catch (err) {
                 // pass
               }
@@ -596,6 +599,7 @@ export default function Home() {
                 
                 distance == 0 ? setId(7) : null;
                 distance == 0 ? setWin(true) : null;
+                distance == 0 ? setShowResult(true); : null;
               } catch (err) {
                 // pass
               }
@@ -624,6 +628,7 @@ export default function Home() {
 
                 distance == 0 ? setId(7) : null;
                 distance == 0 ? setWin(true) : null;
+                distance == 0 ? setShowResult(true); : null;
               } catch (err) {
                 // pass
               }
