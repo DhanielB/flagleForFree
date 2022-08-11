@@ -356,7 +356,7 @@ export default function Home() {
   }) {
     return (
       <div>
-        {id < 0 ? (
+        {id == 1 ? (
           <div className="bg-[#DDDDDD] w-12 h-12 top-18 absolute"></div>
         ) : null}
 
