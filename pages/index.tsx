@@ -572,6 +572,8 @@ export default function Home() {
                 setSixDistance(
                   distance == 0 ? "🎉" : distance.toFixed(0).toString() + " KM"
                 );
+
+                setSix(flag.name)
               }catch(err) {
                 setSixDistance(
                   'Not found'
