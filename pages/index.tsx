@@ -311,14 +311,14 @@ export default function Home() {
           className="text-center text-white p-2 border border-gray bg-transparent left-32 outline-none rounded absolute"
           placeholder="Enter a coutry"
           onInput={(event) => {
-            if (id == validId || id == 1) {
+            if (id == validId) {
               setValue(event.currentTarget.value);
             }
           }}
           value={value}
-          autoFocus={id == validId || id == 1}
+          autoFocus={id == validId}
         ></input>
-        {id == validId || id == 1 ? (
+        {id == validId ? (
           <button
             className="font-bold p-2 bg-white rounded left-80 absolute"
             onClick={() => {
