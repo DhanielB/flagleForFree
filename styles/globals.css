@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  backagroud-color: #1b1a1a;
+}
