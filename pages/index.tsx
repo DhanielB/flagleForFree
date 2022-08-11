@@ -356,27 +356,27 @@ export default function Home() {
   }) {
     return (
       <div>
-        {id == 1 ? (
+        {id < 1 ? (
           <div className="bg-[#DDDDDD] w-12 h-12 top-18 absolute"></div>
         ) : null}
 
-        {id < 1 ? (
+        {id < 2 ? (
           <div className="bg-[#DDDDDD] w-16 h-12 top-18 left-12 absolute"></div>
         ) : null}
 
-        {id < 2 ? (
+        {id < 3 ? (
           <div className="bg-[#DDDDDD] w-12 h-12 top-18 left-28 absolute"></div>
         ) : null}
 
-        {id < 3 ? (
+        {id < 4 ? (
           <div className="bg-[#DDDDDD] w-12 h-16 top-12 absolute"></div>
         ) : null}
 
-        {id < 4 ? (
+        {id < 5 ? (
           <div className="bg-[#DDDDDD] w-16 h-16 top-12 left-12 absolute"></div>
         ) : null}
 
-        {id < 5 ? (
+        {id < 6 ? (
           <div className="bg-[#DDDDDD] w-12 h-16 top-12 left-28 absolute"></div>
         ) : null}
 
