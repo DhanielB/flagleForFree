@@ -420,7 +420,7 @@ export default function Home() {
 
         <div className="top-72 absolute">
           <CountryInput
-            id={0}
+            id={1}
             validId={id}
             setValidId={setId}
             value={one}
@@ -446,7 +446,7 @@ export default function Home() {
           ></CountryInput>
 
           <CountryInput
-            id={1}
+            id={2}
             validId={id}
             setValidId={setId}
             value={two}
@@ -473,7 +473,7 @@ export default function Home() {
           ></CountryInput>
 
           <CountryInput
-            id={2}
+            id={3}
             validId={id}
             setValidId={setId}
             value={three}
@@ -500,7 +500,7 @@ export default function Home() {
           ></CountryInput>
 
           <CountryInput
-            id={3}
+            id={4}
             validId={id}
             setValidId={setId}
             value={four}
@@ -527,7 +527,7 @@ export default function Home() {
           ></CountryInput>
 
           <CountryInput
-            id={4}
+            id={5}
             validId={id}
             setValidId={setId}
             value={five}
@@ -554,7 +554,7 @@ export default function Home() {
           ></CountryInput>
 
           <CountryInput
-            id={5}
+            id={6}
             validId={id}
             setValidId={setId}
             value={six}
