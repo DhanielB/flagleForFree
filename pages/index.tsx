@@ -402,7 +402,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex bg-[#1b1a1a] w-screen h-screen">
+    <div className="app flex bg-[#1b1a1a] w-screen h-screen">
       <main className="flex">
         <div className="font-extrabold tracking-tighter text-4xl top-16 left-40 absolute">
           <h1 className="text-green-500">
