@@ -49,6 +49,7 @@ export default function Home() {
 
   const [six, setSix] = useState("");
   const [sixDistance, setSixDistance] = useState("KM");
+  const input = useAutoFocus()
 
   function useWindowSize() {
     // Initialize state with undefined width/height so server and client renders match
@@ -129,6 +130,7 @@ export default function Home() {
             }
           }}
           value={value}
+          ref={input}
         ></input>
         {id == validId ? (
           <button
