@@ -3,267 +3,16 @@ import React, { useState, useEffect } from "react";
 
 import Confetti from "react-confetti";
 
-import Flag from "react-world-flags";
 import { getDistance } from "geolib";
 
-import { countries } from "country-data";
 import { getCode } from "country-list";
 
 // @ts-ignore
 import geoo from "geos-major";
+import Image from "next/image";
 
 export default function Home() {
-  const coutryCodes = [
-    "AD",
-    "AE",
-    "AF",
-    "AG",
-    "AI",
-    "AL",
-    "AM",
-    "AO",
-    "AQ",
-    "AR",
-    "AS",
-    "AT",
-    "AU",
-    "AW",
-    "AX",
-    "AZ",
-    "BA",
-    "BB",
-    "BD",
-    "BE",
-    "BF",
-    "BG",
-    "BH",
-    "BI",
-    "BJ",
-    "BL",
-    "BM",
-    "BN",
-    "BO",
-    "BQ",
-    "BR",
-    "BS",
-    "BT",
-    "BV",
-    "BW",
-    "BY",
-    "BZ",
-    "CA",
-    "CC",
-    "CD",
-    "CF",
-    "CG",
-    "CH",
-    "CI",
-    "CK",
-    "CL",
-    "CM",
-    "CN",
-    "CO",
-    "CR",
-    "CU",
-    "CV",
-    "CW",
-    "CX",
-    "CY",
-    "CZ",
-    "DE",
-    "DJ",
-    "DK",
-    "DM",
-    "DO",
-    "DZ",
-    "EC",
-    "EE",
-    "EG",
-    "EH",
-    "ER",
-    "ES",
-    "ET",
-    "FI",
-    "FJ",
-    "FK",
-    "FM",
-    "FO",
-    "FR",
-    "GA",
-    "GB",
-    "GD",
-    "GE",
-    "GF",
-    "GG",
-    "GH",
-    "GI",
-    "GL",
-    "GM",
-    "GN",
-    "GP",
-    "GQ",
-    "GR",
-    "GS",
-    "GT",
-    "GU",
-    "GW",
-    "GY",
-    "HK",
-    "HM",
-    "HN",
-    "HR",
-    "HT",
-    "HU",
-    "ID",
-    "IE",
-    "IL",
-    "IM",
-    "IN",
-    "IO",
-    "IQ",
-    "IR",
-    "IS",
-    "IT",
-    "JE",
-    "JM",
-    "JO",
-    "JP",
-    "KE",
-    "KG",
-    "KH",
-    "KI",
-    "KM",
-    "KN",
-    "KP",
-    "KR",
-    "KW",
-    "KY",
-    "KZ",
-    "LA",
-    "LB",
-    "LC",
-    "LI",
-    "LK",
-    "LR",
-    "LS",
-    "LT",
-    "LU",
-    "LV",
-    "LY",
-    "MA",
-    "MC",
-    "MD",
-    "ME",
-    "MF",
-    "MG",
-    "MH",
-    "MK",
-    "ML",
-    "MM",
-    "MN",
-    "MO",
-    "MP",
-    "MQ",
-    "MR",
-    "MS",
-    "MT",
-    "MU",
-    "MV",
-    "MW",
-    "MX",
-    "MY",
-    "MZ",
-    "NA",
-    "NC",
-    "NE",
-    "NF",
-    "NG",
-    "NI",
-    "NL",
-    "NO",
-    "NP",
-    "NR",
-    "NU",
-    "NZ",
-    "OM",
-    "PA",
-    "PE",
-    "PF",
-    "PG",
-    "PH",
-    "PK",
-    "PL",
-    "PM",
-    "PN",
-    "PR",
-    "PS",
-    "PT",
-    "PW",
-    "PY",
-    "QA",
-    "RE",
-    "RO",
-    "RS",
-    "RU",
-    "RW",
-    "SA",
-    "SB",
-    "SC",
-    "SD",
-    "SE",
-    "SG",
-    "SH",
-    "SI",
-    "SJ",
-    "SK",
-    "SL",
-    "SM",
-    "SN",
-    "SO",
-    "SR",
-    "SS",
-    "ST",
-    "SV",
-    "SX",
-    "SY",
-    "SZ",
-    "TC",
-    "TD",
-    "TF",
-    "TG",
-    "TH",
-    "TJ",
-    "TK",
-    "TL",
-    "TM",
-    "TN",
-    "TO",
-    "TR",
-    "TT",
-    "TV",
-    "TW",
-    "TZ",
-    "UA",
-    "UG",
-    "UM",
-    "US",
-    "UY",
-    "UZ",
-    "VA",
-    "VC",
-    "VE",
-    "VG",
-    "VI",
-    "VN",
-    "VU",
-    "WF",
-    "WS",
-    "YE",
-    "YT",
-    "ZA",
-    "ZM",
-    "ZW",
-  ];
+  const countryCodes = require("../dist/code.json")
 
   const size = useWindowSize();
 
@@ -357,19 +106,13 @@ export default function Home() {
           }}
           onKeyPress={(event) => {
             if (id == validId && event.key == "Enter") {
-              const allCountriesNames = [];
-              const allCountries = countries.all;
-
-              for (let countryData of allCountries) {
-                const countryName = countryData.name;
-
-                allCountriesNames.push(countryName);
-              }
-
-              if (allCountriesNames.includes(value)) {
-                setValidId(validId + 1);
-
-                callback(value);
+              for(let countrieAlpha2 in countryCodes) {
+                const countrieName = countryCodes[countrieAlpha2]
+                if (value == countrieName) {
+                  setValidId(validId + 1);
+                
+                  callback(countrieAlpha2);
+                }
               }
             }
           }}
@@ -380,19 +123,13 @@ export default function Home() {
           <button
             className="font-bold p-2 bg-white rounded left-80 absolute"
             onClick={() => {
-              const allCountriesNames = [];
-              const allCountries = countries.all;
-
-              for (let countryData of allCountries) {
-                const countryName = countryData.name;
-
-                allCountriesNames.push(countryName);
-              }
-
-              if (allCountriesNames.includes(value)) {
-                setValidId(validId + 1);
-
-                callback(value);
+              for(let countrieAlpha2 in countryCodes) {
+                const countrieName = countryCodes[countrieAlpha2]
+                if (value == countrieName) {
+                  setValidId(validId + 1);
+                
+                  callback(countrieAlpha2);
+                }
               }
             }}
           >
@@ -437,8 +174,8 @@ export default function Home() {
         {id < 6 ? (
           <div className="bg-[#DDDDDD] w-12 h-16 top-12 left-28 absolute"></div>
         ) : null}
-
-        <Flag className={className} code={code} />
+        
+        {countryCodes[code] ? <Image className={className} src={require(`../dist/flags/${countryCodes[code]}.png`)} width={160} height={110} alt="Flag" objectFit="cover"/> : null}
       </div>
     );
   }
@@ -449,9 +186,15 @@ export default function Home() {
   });
 
   useEffect(() => {
+    let codesCountry = []
+
+    for(let code in countryCodes) {
+      codesCountry.push(code)
+    }
+
     const randomFlagCode =
-      coutryCodes[Math.round(Math.random() * coutryCodes.length - 1)];
-    const randomFlagName = countries[randomFlagCode].name;
+    codesCountry[Math.round(Math.random() * codesCountry.length - 1)];
+    const randomFlagName = countryCodes[randomFlagCode];
 
     setFlag({
       name: randomFlagName,
@@ -500,7 +243,7 @@ export default function Home() {
             distance={oneDistance}
             callback={(value: string) => {
               const from = flag.code;
-              const to = getCode(value);
+              const to = value;
 
               try {
                 const distance =
@@ -529,7 +272,7 @@ export default function Home() {
             className="top-12 absolute"
             callback={(value: string) => {
               const from = flag.code;
-              const to = getCode(value);
+              const to = value;
 
               try {
                 const distance =
@@ -558,7 +301,7 @@ export default function Home() {
             className="top-24 absolute"
             callback={(value: string) => {
               const from = flag.code;
-              const to = getCode(value);
+              const to = value;
 
               try {
                 const distance =
@@ -587,7 +330,7 @@ export default function Home() {
             className="top-36 absolute"
             callback={(value: string) => {
               const from = flag.code;
-              const to = getCode(value);
+              const to = value;
 
               try {
                 const distance =
@@ -616,7 +359,7 @@ export default function Home() {
             className="top-48 absolute"
             callback={(value: string) => {
               const from = flag.code;
-              const to = getCode(value);
+              const to = value;
 
               try {
                 const distance =
@@ -645,7 +388,7 @@ export default function Home() {
             className="top-60 absolute"
             callback={(value: string) => {
               const from = flag.code;
-              const to = getCode(value);
+              const to = value;
 
               try {
                 const distance =
