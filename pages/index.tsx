@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 import Confetti from "react-confetti";
 
@@ -12,6 +12,18 @@ import geoo from "geos-major";
 import Image from "next/image";
 
 export default function Home() {
+  const useAutoFocus = () => {
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+       }
+     }, []);
+
+     return inputRef
+  }
+
   const countryCodes = require("../dist/code.json")
 
   const size = useWindowSize();
