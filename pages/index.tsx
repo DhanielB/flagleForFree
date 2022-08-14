@@ -96,7 +96,6 @@ export default function Home() {
           {distance}
         </h1>
         <input
-          type="text"
           className="text-center text-white p-2 border border-gray bg-transparent left-32 outline-none rounded absolute"
           placeholder="Enter a coutry"
           onInput={(event) => {
