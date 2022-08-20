@@ -117,6 +117,7 @@ export default function Home() {
           }}
           value={value}
           autoComplete="off"
+          autoFocus={id == validId}
         ></input>
         {id == validId ? (
           <button
